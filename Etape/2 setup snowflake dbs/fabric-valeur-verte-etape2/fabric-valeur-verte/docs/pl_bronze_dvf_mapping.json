@@ -1,0 +1,452 @@
+{
+  "translator": {
+    "type": "TabularTranslator",
+    "mappings": [
+      {
+        "source": {
+          "name": "id_mutation",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ID_MUTATION",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "date_mutation",
+          "type": "String"
+        },
+        "sink": {
+          "name": "DATE_MUTATION",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "numero_disposition",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NUMERO_DISPOSITION",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "nature_mutation",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NATURE_MUTATION",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "valeur_fonciere",
+          "type": "String"
+        },
+        "sink": {
+          "name": "VALEUR_FONCIERE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "adresse_numero",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ADRESSE_NUMERO",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "adresse_suffixe",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ADRESSE_SUFFIXE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "adresse_code_voie",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ADRESSE_CODE_VOIE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "adresse_nom_voie",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ADRESSE_NOM_VOIE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "code_postal",
+          "type": "String"
+        },
+        "sink": {
+          "name": "CODE_POSTAL",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "code_commune",
+          "type": "String"
+        },
+        "sink": {
+          "name": "CODE_COMMUNE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "nom_commune",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NOM_COMMUNE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "ancien_code_commune",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ANCIEN_CODE_COMMUNE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "ancien_nom_commune",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ANCIEN_NOM_COMMUNE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "code_departement",
+          "type": "String"
+        },
+        "sink": {
+          "name": "CODE_DEPARTEMENT",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "id_parcelle",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ID_PARCELLE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "ancien_id_parcelle",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ANCIEN_ID_PARCELLE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "numero_volume",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NUMERO_VOLUME",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot1_numero",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT1_NUMERO",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot1_surface_carrez",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT1_SURFACE_CARREZ",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot2_numero",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT2_NUMERO",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot2_surface_carrez",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT2_SURFACE_CARREZ",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot3_numero",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT3_NUMERO",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot3_surface_carrez",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT3_SURFACE_CARREZ",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot4_numero",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT4_NUMERO",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot4_surface_carrez",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT4_SURFACE_CARREZ",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot5_numero",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT5_NUMERO",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "lot5_surface_carrez",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LOT5_SURFACE_CARREZ",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "nombre_lots",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NOMBRE_LOTS",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "code_type_local",
+          "type": "String"
+        },
+        "sink": {
+          "name": "CODE_TYPE_LOCAL",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "type_local",
+          "type": "String"
+        },
+        "sink": {
+          "name": "TYPE_LOCAL",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "surface_reelle_bati",
+          "type": "String"
+        },
+        "sink": {
+          "name": "SURFACE_REELLE_BATI",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "nombre_pieces_principales",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NOMBRE_PIECES_PRINCIPALES",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "code_nature_culture",
+          "type": "String"
+        },
+        "sink": {
+          "name": "CODE_NATURE_CULTURE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "nature_culture",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NATURE_CULTURE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "code_nature_culture_speciale",
+          "type": "String"
+        },
+        "sink": {
+          "name": "CODE_NATURE_CULTURE_SPECIALE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "nature_culture_speciale",
+          "type": "String"
+        },
+        "sink": {
+          "name": "NATURE_CULTURE_SPECIALE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "surface_terrain",
+          "type": "String"
+        },
+        "sink": {
+          "name": "SURFACE_TERRAIN",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "longitude",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LONGITUDE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "latitude",
+          "type": "String"
+        },
+        "sink": {
+          "name": "LATITUDE",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "ANNEE_FICHIER",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ANNEE_FICHIER",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "SOURCE_URL",
+          "type": "String"
+        },
+        "sink": {
+          "name": "SOURCE_URL",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "DATE_CHARGEMENT",
+          "type": "String"
+        },
+        "sink": {
+          "name": "DATE_CHARGEMENT",
+          "type": "String"
+        }
+      },
+      {
+        "source": {
+          "name": "ID_EXECUTION",
+          "type": "String"
+        },
+        "sink": {
+          "name": "ID_EXECUTION",
+          "type": "String"
+        }
+      }
+    ],
+    "typeConversion": true,
+    "typeConversionSettings": {
+      "allowDataTruncation": false,
+      "treatBooleanAsNumber": false
+    }
+  }
+}
