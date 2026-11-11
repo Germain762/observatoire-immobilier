@@ -10,6 +10,7 @@ keys/
 *.p8
 *.pem
 .env
+Etape/
 
 # Python et notebooks locaux
 __pycache__/
