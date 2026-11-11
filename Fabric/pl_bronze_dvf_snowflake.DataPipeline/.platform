@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_bronze_dvf_snowflake"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "377f2667-1158-9f49-4fe7-f0cfdcf18fad"
+  }
+}
