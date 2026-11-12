@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_bronze_controle_mirror"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cfafe5e3-b363-847b-4fbb-ae126a08a3db"
+  }
+}

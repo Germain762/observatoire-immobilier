@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "source": {
+      "type": "Snowflake",
+      "typeProperties": {
+        "connection": "1eec008b-3a33-44ba-b861-753db4678dad",
+        "database": "FONCIER"
+      }
+    },
+    "target": {
+      "type": "MountedRelationalDatabase",
+      "typeProperties": {
+        "defaultSchema": "dbo",
+        "format": "Delta",
+        "retentionInDays": 1,
+        "enableDeltaChangeDataFeed": false
+      }
+    },
+    "mountedTables": [
+      {
+        "source": {
+          "typeProperties": {
+            "schemaName": "CORE",
+            "tableName": "MUTATIONS_LOGEMENT"
+          }
+        }
+      }
+    ]
+  }
+}

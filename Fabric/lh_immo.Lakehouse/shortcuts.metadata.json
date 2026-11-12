@@ -1,0 +1,15 @@
+[
+  {
+    "name": "MUTATIONS_LOGEMENT",
+    "path": "/Tables/bronze",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/CORE/MUTATIONS_LOGEMENT",
+        "itemId": "f287cec2-f8a8-ac79-42b4-0e0d5a0df2ef",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "MountedRelationalDatabase"
+      }
+    }
+  }
+]
