@@ -80,8 +80,16 @@ Périmètre : développement sur la Normandie (départements 14, 27, 50, 61, 76)
 .
 ├── README.md
 ├── .gitignore
+├── docs/                   Pas-à-pas par étape et fichiers de configuration des pipelines
+│   ├── etape-2-dvf.md
+│   ├── etape-3-mirroring.md
+│   └── pl_bronze_dvf_mapping.json
 ├── snowflake/              Scripts SQL Snowflake, numérotés dans l'ordre d'exécution
-│   └── 00_setup.sql        Warehouses, resource monitor, base FONCIER, rôles, utilisateurs de service
+│   ├── 00_setup.sql        Warehouses, resource monitor, base FONCIER, rôles, utilisateurs de service
+│   ├── 01_raw_dvf.sql      Périmètre (REF.PERIMETRE) et table RAW.DVF_MUTATIONS
+│   ├── 02_core_mutations_logement.sql   Table CORE et procédure de construction
+│   ├── 03_controles_dvf.sql             Contrôles de fin d'étape 2
+│   └── 04_test_mirroring.sql            Vérifications et test de propagation du Mirroring
 └── fabric/                 Dossier Git des workspaces Fabric (écrit par Fabric, ne pas éditer à la main)
     ├── admin/              nb_utils, lh_admin, journal d'exécution
     ├── bronze/
@@ -155,9 +163,9 @@ Périmètre : développement sur la Normandie (départements 14, 27, 50, 61, 76)
 
 ## Avancement
 
-- [ ] 1. Mise en place (Snowflake, GitHub, workspaces, connexions)
-- [ ] 2. DVF dans Snowflake (`RAW` → `CORE.MUTATIONS_LOGEMENT`)
-- [ ] 3. Mirroring Snowflake → Fabric
+- [x] 1. Mise en place (Snowflake, GitHub, workspaces, connexions)
+- [x] 2. DVF dans Snowflake (`RAW` → `CORE.MUTATIONS_LOGEMENT`) — [pas-à-pas](docs/etape-2-dvf.md)
+- [ ] 3. Mirroring Snowflake → Fabric — [pas-à-pas](docs/etape-3-mirroring.md)
 - [ ] 4. DPE en bronze et silver (Spark)
 - [ ] 5. Appariement ventes ↔ DPE (Spark)
 - [ ] 6. Gold, valeur verte, passage au national
@@ -167,11 +175,24 @@ Périmètre : développement sur la Normandie (départements 14, 27, 50, 61, 76)
 
 | Date | Sujet | Décision | Raison |
 | --- | --- | --- | --- |
-| | | | |
+| 2026-11-10 | RAW DVF | Fichiers nationaux par année, toutes colonnes en texte | Un chargement n'échoue jamais sur un type ; changer de périmètre ne demande pas de rechargement |
+| 2026-11-10 | Rechargement | Purge de l'année puis réinsertion (pre-copy script) | DGFiP ajoute des ventes anciennes à chaque publication |
+| 2026-11-10 | Périmètre | Table `REF.PERIMETRE`, Normandie active au départ | Passage au national par une simple mise à jour |
+| 2026-11-10 | Ventes retenues | Nature « Vente », un seul logement, aucun local professionnel, une seule valeur foncière ; dépendances tolérées et comptées | Le prix au m² n'a de sens que pour un logement unique |
+| 2026-11-10 | Comptage des locaux | Locaux distincts, pas lignes | Un local est répété sur chaque nature de culture de sa parcelle |
+| 2026-11-10 | Clé de vente | `ID_VENTE` = empreinte SHA-256 de la date, du prix, de la commune, de la parcelle, du type, de la surface, des pièces et du premier lot | `id_mutation` n'est pas garanti stable d'une publication à l'autre |
+| 2026-11-10 | Valeurs extrêmes | Gardées, signalées par `EST_PLAUSIBLE` (300 à 30 000 €/m², 9 à 1 000 m²) | L'analyse choisit ; rien n'est perdu |
+| 2026-11-10 | Mise à jour de CORE | MERGE sur empreinte de contenu + DELETE, garde-fou à 50 % du volume | Une relance sans changement ne produit aucun flux CDC pour le Mirroring |
+| 2026-11-11 | En-tête DVF | Colonnes de lots confirmées en `lot1_…` ; l'ordre des colonnes diffère de la documentation Etalab, sans effet car le mapping se fait par nom | Vérifié sur `2025/departements/76.csv.gz` |
+| 2026-11-11 | Millésimes | 2021 à 2025 disponibles ; les années qui sortent de la publication (5 ans glissants) restent dans RAW et CORE | Le pre-copy script ne purge que les années rechargées ; on garde l'historique |
+| 2026-11-11 | Mirroring | Table choisie explicitement (pas « Mirror all data »), connexion et warehouse dédiés | Contrôle du périmètre et coût lisible séparément |
+| 2026-11-11 | Mirroring | Réplication laissée active en permanence ; aucun DDL sur `MUTATIONS_LOGEMENT` | Un arrêt-reprise ou un `ALTER TABLE` recharge toute la table ; sans changement, l'interrogation ne réveille pas le warehouse |
+| 2026-11-11 | Accès Spark | Raccourci OneLake `lh_immo.bronze.mutations_logement` vers le miroir | La base miroir est en lecture seule ; le raccourci ne copie rien |
+| 2026-11-12 | Prix au m² nul | Ventes dont le prix au m² s'arrondit à 0,00 € : avertissement, pas blocage ; contrôles bloquants limités aux NULL, doublons et cohérence d'`EST_PLAUSIBLE` | Cessions symboliques réelles dans DVF, déjà écartées par `EST_PLAUSIBLE` ; élargir la colonne serait un DDL, donc un rechargement complet du miroir |
 
 ## Coûts et garde-fous
 
-- **Snowflake** : warehouses XS avec auto-suspend à 60 s, resource monitor `RM_IMMO` qui suspend à 90 % du quota. Le Mirroring interroge Snowflake en continu et ne se planifie pas : arrêter la réplication entre deux sessions de travail.
+- **Snowflake** : warehouses XS avec auto-suspend à 60 s, resource monitor `RM_IMMO` qui suspend à 90 % du quota. Le Mirroring tourne en continu et ne se planifie pas ; on le laisse actif, car un arrêt suivi d'une reprise recharge toute la table. Sans changement côté source, il n'interroge plus qu'une fois par heure et ne réveille pas le warehouse. Dans `immo-test`, le miroir synchronisé depuis Git reste arrêté.
 - **Fabric** : capacité d'essai ; développement sur la Normandie avant tout passage au national.
 - **Secrets** : clés privées dans `keys/` (ignoré par Git), jamais dans un notebook.
 
