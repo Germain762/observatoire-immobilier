@@ -1,0 +1,65 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "e4ffc6af-dc54-a6cf-413a-f990ed03b293",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "p_departements": {
+              "value": "",
+              "type": "string"
+            },
+            "p_taille_page": {
+              "value": "10000",
+              "type": "int"
+            },
+            "p_runs_conserves": {
+              "value": "3",
+              "type": "int"
+            }
+          }
+        },
+        "externalReferences": {
+          "connection": "a79aafc1-c023-4218-ad5b-b820a3320878"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 60,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "nb_bronze_dpe",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "9cb193ba-9340-b2aa-4139-df59684475a4",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "externalReferences": {
+          "connection": "a79aafc1-c023-4218-ad5b-b820a3320878"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 60,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "nb_silver_dpe",
+        "dependsOn": [
+          {
+            "activity": "nb_bronze_dpe",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
